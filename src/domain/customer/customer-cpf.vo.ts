@@ -80,8 +80,16 @@ export class CustomerCPF extends ValueObject<CustomerCPFProps> {
       return left(validationError);
     }
 
-    const customerCPF = new CustomerCPF({ value: cpf });
+    const unformattedCPF: string = cpf.replaceAll(/[.|-]/g, "");
+    const customerCPF = new CustomerCPF({ value: unformattedCPF });
 
     return right(customerCPF);
+  }
+
+  public getFormattedCPF(): string {
+    const unformattedCPF: string = this._props.value;
+    const formattedCPF = unformattedCPF.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+
+    return formattedCPF;
   }
 }

@@ -21,7 +21,7 @@ describe("Customer Entity", () => {
       expect(customerOrError.result).toHaveProperty("name", expect.any(CustomerName));
       expect(customerOrError.result).toHaveProperty("name.value", customerProps.name);
       expect(customerOrError.result).toHaveProperty("cpf", expect.any(CustomerCPF));
-      expect(customerOrError.result).toHaveProperty("cpf.value", customerProps.cpf);
+      expect(customerOrError.result).toHaveProperty("cpf.value", "69014134088");
       expect(customerOrError.result).toHaveProperty("birthday", expect.any(CustomerBirthday));
       expect(customerOrError.result).toHaveProperty("birthday.stringValue", customerProps.birthday);
       expect(customerOrError.result).toHaveProperty("id", expect.any(String));
@@ -32,7 +32,7 @@ describe("Customer Entity", () => {
       const customerProps: CreateCustomerProps = {
         name: "Fake Customer Name",
         birthday: "10/09/2000",
-        cpf: "690.141.340-88",
+        cpf: "69014134088",
         id: randomUUID(),
         createdAt: new Date(),
       };

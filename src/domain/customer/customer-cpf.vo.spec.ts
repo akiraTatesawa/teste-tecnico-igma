@@ -12,6 +12,7 @@ describe("Customer CPF Value Object", () => {
       expect(customerCPFOrError.result).toBeInstanceOf(CustomerCPF);
       expect(customerCPFOrError.result).toHaveProperty("value", cpf);
     });
+
     it("Should be able to create a Customer CPF with the pattern '999.999.999-00'", () => {
       const cpf = "690.141.340-88";
 
@@ -19,7 +20,15 @@ describe("Customer CPF Value Object", () => {
 
       expect(customerCPFOrError.isRight()).toEqual(true);
       expect(customerCPFOrError.result).toBeInstanceOf(CustomerCPF);
-      expect(customerCPFOrError.result).toHaveProperty("value", cpf);
+      expect(customerCPFOrError.result).toHaveProperty("value", "69014134088");
+    });
+
+    it("Should be able to get the formatted Customer CPF", () => {
+      const cpf = "69014134088";
+
+      const customerCPF = CustomerCPF.create(cpf).result as CustomerCPF;
+
+      expect(customerCPF.getFormattedCPF()).toEqual("690.141.340-88");
     });
   });
 
