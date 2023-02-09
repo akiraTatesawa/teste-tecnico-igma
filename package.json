@@ -11,7 +11,7 @@
     "test:docker:down": "npm run test:compose -- down",
     "test:docker": "npm run test:compose -- up --force-recreate",
     "test:local": "npm run test:load-env -- npm run test",
-    "test:ci": "npm run test:load-env -- jest -- --runInBand --coverage=false"
+    "ci:test": "npm run test:load-env -- jest -- --runInBand --coverage=false"
   },
   "repository": {
     "type": "git",
