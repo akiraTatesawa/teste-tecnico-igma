@@ -17,7 +17,7 @@ export class CustomerName extends ValueObject<CustomerNameProps> {
     return this._props.value;
   }
 
-  public static create(name: string): CustomerNameCreateResult {
+  private static validate(name: string): Either<DomainErrors.InvalidPropsError, null> {
     if (name.length === 0) {
       return left(new DomainErrors.InvalidPropsError("Customer Name cannot be an empty string"));
     }
@@ -32,6 +32,18 @@ export class CustomerName extends ValueObject<CustomerNameProps> {
       return left(
         new DomainErrors.InvalidPropsError("Customer Name cannot be longer than 60 char")
       );
+    }
+
+    return right(null);
+  }
+
+  public static create(name: string): CustomerNameCreateResult {
+    const validationResult = CustomerName.validate(name);
+
+    if (validationResult.isLeft()) {
+      const validationError = validationResult.result;
+
+      return left(validationError);
     }
 
     const customerName = new CustomerName({ value: name });
