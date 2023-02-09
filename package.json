@@ -4,13 +4,14 @@
   "description": "API para cadastro de clientes",
   "main": "index.js",
   "scripts": {
-    "test": "jest -- --runInBand",
+    "test": "jest --runInBand",
     "test:load-env": "dotenv -e .env.test.local",
     "test:compose": "docker-compose -f docker-compose.test.yml --env-file .env.test",
     "test:postgres:up": "npm run test:compose -- up -d igma-postgres-test",
     "test:docker:down": "npm run test:compose -- down",
-    "test:docker": "npm run test:compose -- up",
-    "test:local": "npm run test:load-env -- npm run test"
+    "test:docker": "npm run test:compose -- up --force-recreate",
+    "test:local": "npm run test:load-env -- npm run test",
+    "ci:test": "npm run test:load-env -- jest -- --runInBand --coverage=false"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,7 @@
   },
   "homepage": "https://github.com/akiraTatesawa/teste-tecnico-igma#readme",
   "dependencies": {
-    "@ngneat/falso": "^6.2.0",
+    "@ngneat/falso": "^6.4.0",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^6.0.0",
     "node": "^19.1.0"

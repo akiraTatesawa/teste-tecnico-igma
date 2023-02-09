@@ -18,20 +18,20 @@ Feature: Customer Registration
     Scenario: Customer tries to be registered with an invalid cpf, and fails
         Given the Customer provides an invalid cpf format
         When the system tries to register the Customer
-        Then the Customer should see "The provided CPF is invalid"
+        Then the Customer should see a message informing that the cpf is invalid
     
     Scenario: Customer tries to be registered with an invalid name, and fails
         Given the Customer provides a valid cpf
         But the Customer provides an invalid name
         When the system tries to register the Customer
-        Then the Customer should see "The provided Name is invalid"
+        Then the Customer should see a massage informing that the name is invalid
 
     Scenario: Customer tries to be registered with an invalid birthday, and fails
         Given the Customer provides a valid cpf
         And the Customer provides a valid name
         But the Customer provides an invalid birthday
         When the system tries to register the Customer
-        Then the Customer should see "The provided Birthday is invalid"
+        Then the Customer should see a massage informing that the birthday is invalid
     
     Scenario: Customer tries to be registered with a cpf that is already taken, and fails
         Given the Customer provides a valid cpf
