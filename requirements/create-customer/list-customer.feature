@@ -14,7 +14,7 @@ Feature: List Customer by CPF
     Scenario: Admin tries to list a customer with an invalid cpf, and fails
         Given the Admin provides an invalid cpf
         When the Admin tries to list the Customer
-        Then the Admin should see "The provided CPF is invalid"
+        Then the Admin should see a message informing that the cpf is invalid
     
     Scenario: Admin tries to list a customer with a cpf that is not registered, and fails
         Given the Admin provides a valid cpf
