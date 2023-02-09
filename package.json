@@ -12,8 +12,16 @@
     "test:docker": "npm run test:compose -- up",
     "test:local": "npm run test:load-env -- npm run test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akiraTatesawa/teste-tecnico-igma.git"
+  },
   "author": "Arthur Akira Tatesawa",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akiraTatesawa/teste-tecnico-igma/issues"
+  },
+  "homepage": "https://github.com/akiraTatesawa/teste-tecnico-igma#readme",
   "dependencies": {
     "@ngneat/falso": "^6.2.0",
     "dotenv": "^16.0.3",
