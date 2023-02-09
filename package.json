@@ -10,7 +10,8 @@
     "test:postgres:up": "npm run test:compose -- up -d igma-postgres-test",
     "test:docker:down": "npm run test:compose -- down",
     "test:docker": "npm run test:compose -- up --force-recreate",
-    "test:local": "npm run test:load-env -- npm run test"
+    "test:local": "npm run test:load-env -- npm run test",
+    "test:ci": "npm run test:load-env -- jest -- --runInBand --coverage=false"
   },
   "repository": {
     "type": "git",
