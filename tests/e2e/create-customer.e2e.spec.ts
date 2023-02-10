@@ -15,7 +15,7 @@ describe("POST /customers", () => {
   });
 
   describe("Success", () => {
-    it("Should be able to create a customer", async () => {
+    it("[201::CREATED] Should be able to create a customer", async () => {
       const request: CreateCustomerDTO = {
         name: "Fake Customer Name",
         birthday: "01/09/1999",
@@ -35,7 +35,7 @@ describe("POST /customers", () => {
   });
 
   describe("Failure", () => {
-    it("Should return an error if there are missing fields on the request body", async () => {
+    it("[400::BAD_REQUEST] Should return an error if there are missing fields on the request body", async () => {
       const request = {
         name: "Fake Customer Name",
         birthday: "01/09/1999",
@@ -48,7 +48,7 @@ describe("POST /customers", () => {
       expect(response.body).toHaveProperty("message", "'cpf' is required");
     });
 
-    it("Should return an error if the Name is invalid", async () => {
+    it("[422::UNPROCESSABLE_ENTITY] Should return an error if the Name is invalid", async () => {
       const request: CreateCustomerDTO = {
         name: "Invalid Name 123",
         birthday: "01/09/1999",
@@ -62,7 +62,7 @@ describe("POST /customers", () => {
       expect(response.body).toHaveProperty("message", "Customer Name must consist of only letters");
     });
 
-    it("Should return an error if the CPF has an invalid format", async () => {
+    it("[422::UNPROCESSABLE_ENTITY] Should return an error if the CPF has an invalid format", async () => {
       const request: CreateCustomerDTO = {
         name: "Fake Customer Name",
         birthday: "01/09/1999",
@@ -79,7 +79,7 @@ describe("POST /customers", () => {
       );
     });
 
-    it("Should return an error if the CPF digits are invalid", async () => {
+    it("[422::UNPROCESSABLE_ENTITY] Should return an error if the CPF digits are invalid", async () => {
       const request: CreateCustomerDTO = {
         name: "Fake Customer Name",
         birthday: "01/09/1999",
@@ -93,7 +93,7 @@ describe("POST /customers", () => {
       expect(response.body).toHaveProperty("message", "Invalid CPF");
     });
 
-    it("Should return an error if the Birthday has an invalid format", async () => {
+    it("[422::UNPROCESSABLE_ENTITY] Should return an error if the Birthday has an invalid format", async () => {
       const request: CreateCustomerDTO = {
         name: "Fake Customer Name",
         birthday: "01091999",
@@ -110,7 +110,7 @@ describe("POST /customers", () => {
       );
     });
 
-    it("Should return an error if the CPF is already registered", async () => {
+    it("[409::CONFLICT] Should return an error if the CPF is already registered", async () => {
       const fakeCustomer = await CustomerTestHelper.createCustomer("127.773.620-09");
       const request: CreateCustomerDTO = {
         name: "Fake Customer Name",
