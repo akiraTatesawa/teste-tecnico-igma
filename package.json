@@ -12,8 +12,17 @@
     "test:docker": "npm run test:compose -- up --force-recreate",
     "test:local": "npm run test:load-env -- npm run test",
     "ci:test": "npm run test:load-env -- jest -- --runInBand --coverage=false",
-    "dev:load-env": "dotenv -e .env.development.local",
+    "dev:compose": "docker-compose -f docker-compose.development.yml --env-file .env.development",
+    "dev:postgres": "npm run dev:compose -- up -d igma-postgres-development",
+    "dev:docker": "npm run dev:compose -- up",
+    "dev:load-env": "dotenv -e .env.development",
+    "dev:generate": "npm run dev:load-env -- prisma generate",
+    "dev:migrate": "npm run dev:load-env -- prisma migrate dev",
+    "dev:prisma-studio": "npm run dev:generate && npm run dev:load-env -- prisma studio",
     "dev": "npm run dev:load-env -- -- ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/http/server.ts"
+  },
+  "prisma": {
+    "schema": "./src/infra/data/databases/prisma/schema.prisma"
   },
   "repository": {
     "type": "git",
@@ -27,6 +36,7 @@
   "homepage": "https://github.com/akiraTatesawa/teste-tecnico-igma#readme",
   "dependencies": {
     "@ngneat/falso": "^6.4.0",
+    "@prisma/client": "^4.6.1",
     "cors": "^2.8.5",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
@@ -54,6 +64,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jest": "^29.3.1",
+    "prisma": "^4.6.1",
     "supertest": "^6.3.2",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
