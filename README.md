@@ -15,6 +15,7 @@ Este é um projeto proposto como desafio técnico para uma posição de dev back
 ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 
 ## 🧭 Endpoints
 
@@ -71,16 +72,11 @@ HTTP/1.1 201 Created
 
 ```http
 GET /customers/:customerCPF
+GET /customers/400.200.840-13
+GET /customers/40020084013
 ```
 
 Nesta rota, é possível buscar um cliente através do seu CPF.
-
-- É possível utilizar os dois formatos de CPF para buscar o cliente:
-
-  ```http
-  GET /customers/400.200.840-13
-  GET /customers/40020084013
-  ```
   
 #### Resposta
 
@@ -105,3 +101,45 @@ HTTP/1.1 200 OK
 | `json`           |   `200`    | **OK**          |
 | `json`           |   `404`    | **Not Found**, cliente não encontrado |
 | `json`           |   `422`    | **Unprocessable Entity**, dados inválidos, ex.: CPF com um formato não permitido |
+
+### Listagem de múltiplos Clientes
+
+```http
+GET /customers
+GET /customers?limit=$
+GET /customers?offset=$
+```
+
+Nesta rota, é possível listar múltiplos clientes, havendo a opção de utilizar a paginação através das **query params** `limit` e `offset`.
+
+#### Resposta
+
+```http
+HTTP/1.1 200 OK
+```
+
+```json
+{
+ "customers": [
+    {
+      "id": "c39ecfae-f487-4d35-9254-fb5301525728",
+      "name": "Nome Falso Dois",
+      "cpf": "241.877.890-81",
+      "birthday": "09/07/1999",
+      "registrationDate": "10/02/2023 21:25:02"
+    },
+    {
+      "id": "fdc79c70-e3ba-4ca1-afcc-6991ab5d60a3",
+      "name": "Nome Falso Um",
+      "cpf": "512.902.810-41",
+      "birthday": "09/07/1999",
+      "registrationDate": "10/02/2023 21:24:42"
+    }
+ ]
+}
+```
+
+| Body             |  Code      |  Description                        |
+| :--------------- | :-------   | :--------------------------------- |
+| `json`           |   `200`    | **OK**          |
+| `json`           |   `400`    | **Bad Request**, `limit` ou `offset` inválidos |
