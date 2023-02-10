@@ -34,7 +34,7 @@ jobs:
         with:
           envkey_DATABASE_URL: postgresql://postgres:postgres@localhost:2345/igma-test?schema=public
           envkey_CRYPTR_SECRET: secret
-          file_name: .env.test.local
+          file_name: .env.test
           directory: .
           fail_on_empty: true
 
