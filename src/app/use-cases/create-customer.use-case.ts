@@ -12,7 +12,9 @@ type CreateCustomerResponse = Either<
   CustomerDTO
 >;
 
-export class CreateCustomer implements UseCase<CreateCustomerDTO, CreateCustomerResponse> {
+export interface CreateCustomerUseCase extends UseCase<CreateCustomerDTO, CreateCustomerResponse> {}
+
+export class CreateCustomerImpl implements CreateCustomerUseCase {
   private readonly _customerRepository: CustomerRepository;
 
   constructor(customerRepository: CustomerRepository) {

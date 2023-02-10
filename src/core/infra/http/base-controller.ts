@@ -6,14 +6,14 @@ export abstract class BaseController {
   // Success Methods
   protected ok<DTO>(res: express.Response, dto?: DTO) {
     if (dto) {
-      return res.status(httpStatus.OK).send(dto);
+      return res.status(httpStatus.OK).json(dto);
     }
     return res.sendStatus(httpStatus.OK);
   }
 
   protected created<DTO>(res: express.Response, dto?: DTO) {
     if (dto) {
-      return res.status(httpStatus.CREATED).send(dto);
+      return res.status(httpStatus.CREATED).json(dto);
     }
     return res.sendStatus(httpStatus.CREATED);
   }
