@@ -4,6 +4,14 @@
 
 Este é um projeto proposto como desafio técnico para uma posição de dev back-end na [igma](https://www.linkedin.com/company/igma-digital-product/?src=polymer.co). Trata-se de uma API responsável pelo cadastro e listagem de clientes.
 
+## 📑 Índice
+
+- [🧰 Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [🧭 Endpoints](#-endpoints)
+  - [Cadastro de Cliente](#cadastro-de-cliente)
+  - [Listagem de Cliente por CPF](#listagem-de-cliente-por-cpf)
+  - [Listagem de múltiplos Clientes](#listagem-de-múltiplos-clientes)
+
 ## 🧰 Tecnologias Utilizadas
 
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
