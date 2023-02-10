@@ -66,3 +66,42 @@ HTTP/1.1 201 Created
 | `json`           |   `409`    | **Conflict**, CPF já está cadastrado no sistema |
 | `json`           |   `400`    | **Bad Request**, corpo da requisição inválido, ex.: nome de um campo escrito errado |
 | `json`           |   `422`    | **Unprocessable Entity**, dados inválidos, ex.: CPF com um formato não permitido |
+
+### Listagem de Cliente por CPF
+
+```http
+GET /customers/:customerCPF
+```
+
+Nesta rota, é possível buscar um cliente através do seu CPF.
+
+- É possível utilizar os dois formatos de CPF para buscar o cliente:
+
+  ```http
+  GET /customers/400.200.840-13
+  GET /customers/40020084013
+  ```
+  
+### Resposta
+
+```http
+HTTP/1.1 200 OK
+```
+
+```json
+{
+ "customer": {
+  "id": "3d82be1d-4ecc-4a29-befb-0bb5cb666c2c",
+  "name": "Nome Falso",
+  "cpf": "400.200.840-13",
+  "birthday": "09/07/1999",
+  "registrationDate": "10/02/2023 21:07:19"
+ }
+}
+```
+
+| Body             |  Code      |  Description                        |
+| :--------------- | :-------   | :--------------------------------- |
+| `json`           |   `200`    | **OK**          |
+| `json`           |   `404`    | **Not Found**, cliente não encontrado |
+| `json`           |   `422`    | **Unprocessable Entity**, dados inválidos, ex.: CPF com um formato não permitido |
