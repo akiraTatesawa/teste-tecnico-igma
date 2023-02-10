@@ -24,6 +24,7 @@ export class CustomerController extends BaseController {
     this._listCustomerByCPFUseCase = listCustomerByCPFUseCase;
 
     this.createCustomer = this.createCustomer.bind(this);
+    this.listCustomerByCPF = this.listCustomerByCPF.bind(this);
   }
 
   public async createCustomer(req: CreateCustomerRequest, res: Response): Promise<Response> {
