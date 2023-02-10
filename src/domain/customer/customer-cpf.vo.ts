@@ -52,9 +52,9 @@ export class CustomerCPF extends ValueObject<CustomerCPFProps> {
   }
 
   private static validate(cpf: string): Either<DomainErrors.InvalidPropsError, null> {
-    const cpfRegex: RegExp = /^([0-9]{11})|([0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2})/gm;
+    const cpfRegex: RegExp = /^([0-9]{11})$|^([0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2})$/gm;
 
-    if (!cpf.match(cpfRegex)) {
+    if (!cpfRegex.test(cpf)) {
       return left(
         new DomainErrors.InvalidPropsError(
           "The CPF must follow the patterns '99999999900' or '999.999.999-00'"

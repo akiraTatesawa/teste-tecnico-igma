@@ -6,10 +6,11 @@
   "scripts": {
     "test": "jest --runInBand",
     "test:load-env": "dotenv -e .env.test.local",
-    "test:compose": "docker-compose -f docker-compose.test.yml --env-file .env.test",
+    "test:docker:build": "docker-compose -f docker-compose.test.yml build igma-test --no-cache",
+    "test:compose": "npm run test:docker:build && docker-compose -f docker-compose.test.yml",
     "test:postgres:up": "npm run test:compose -- up -d igma-postgres-test",
     "test:docker:down": "npm run test:compose -- down",
-    "test:docker": "npm run test:compose -- up --force-recreate",
+    "test:docker": "npm run test:compose -- up",
     "test:local": "npm run test:load-env -- npm run test",
     "ci:test": "npm run test:load-env -- jest -- --runInBand --coverage=false",
     "dev:compose": "docker-compose -f docker-compose.development.yml --env-file .env.development",

@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.development
-    container_name: drivent-development
+    container_name: igma-development
     depends_on:
       - igma-postgres-development
     logging:
