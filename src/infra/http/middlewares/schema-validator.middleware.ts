@@ -6,7 +6,7 @@ export class SchemaValidator {
   public static validateBody(schema: Joi.ObjectSchema) {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const validateOrError = schema.validate(req.body, {
-        abortEarly: true,
+        abortEarly: false,
         convert: false,
       });
 
