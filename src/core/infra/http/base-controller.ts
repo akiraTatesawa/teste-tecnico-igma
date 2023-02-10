@@ -19,6 +19,15 @@ export abstract class BaseController {
   }
 
   // Error Methods
+  protected badRequest(res: express.Response, message: string) {
+    const error: APIError = {
+      name: httpStatus[400],
+      message,
+    };
+
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+
   protected notFound(res: express.Response, message: string) {
     const error: APIError = {
       name: httpStatus[404],

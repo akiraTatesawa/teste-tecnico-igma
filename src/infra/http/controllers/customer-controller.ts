@@ -5,26 +5,32 @@ import { CreateCustomerUseCase } from "@app/use-cases/create-customer.use-case";
 import { BaseController } from "@core/infra/http/base-controller";
 import { CustomerDTO } from "@app/dtos/customer.dto";
 import { ListCustomerByCPF } from "@app/use-cases/list-customer-by-cpf.use-case";
+import { ListManyCustomers } from "@app/use-cases/list-many-customers.use-case";
 import { CreateCustomerRequest } from "../requests/create-customer.request";
-import { CustomerViewModel } from "../view-models/customer.view-model";
+import { CustomerViewModel, ManyCustomersViewModel } from "../view-models/customer.view-model";
 import { CustomerPresenter } from "../presenters/customer-presenter";
-import { ListCustomerRequest } from "../requests/list-customer.request";
+import { ListCustomerRequest, ListManyCustomersRequest } from "../requests/list-customer.request";
 
 export class CustomerController extends BaseController {
   private readonly _createCustomerUseCase: CreateCustomerUseCase;
 
   private readonly _listCustomerByCPFUseCase: ListCustomerByCPF;
 
+  private readonly _listManyCustomersUseCase: ListManyCustomers;
+
   constructor(
     createCustomerUseCase: CreateCustomerUseCase,
-    listCustomerByCPFUseCase: ListCustomerByCPF
+    listCustomerByCPFUseCase: ListCustomerByCPF,
+    listManyCustomersUseCase: ListManyCustomers
   ) {
     super();
     this._createCustomerUseCase = createCustomerUseCase;
     this._listCustomerByCPFUseCase = listCustomerByCPFUseCase;
+    this._listManyCustomersUseCase = listManyCustomersUseCase;
 
     this.createCustomer = this.createCustomer.bind(this);
     this.listCustomerByCPF = this.listCustomerByCPF.bind(this);
+    this.listManyCustomers = this.listManyCustomers.bind(this);
   }
 
   public async createCustomer(req: CreateCustomerRequest, res: Response): Promise<Response> {
@@ -84,5 +90,31 @@ export class CustomerController extends BaseController {
     const customerDTO: CustomerDTO = listCustomerOrError.result;
 
     return this.ok<CustomerViewModel>(res, CustomerPresenter.toViewModel(customerDTO));
+  }
+
+  public async listManyCustomers(req: ListManyCustomersRequest, res: Response): Promise<Response> {
+    const { limit, offset } = req.query;
+
+    const listManyCustomersOrError = await this._listManyCustomersUseCase.execute({
+      limit,
+      offset,
+    });
+
+    if (listManyCustomersOrError.isLeft()) {
+      const listCustomersError = listManyCustomersOrError.result;
+      const errorMessage = listCustomersError.message;
+
+      switch (listCustomersError.constructor) {
+        case CustomerErrors.InvalidParamsError:
+          return this.badRequest(res, errorMessage);
+
+        default:
+          return this.fail(res, errorMessage);
+      }
+    }
+
+    const customersDTO: CustomerDTO[] = listManyCustomersOrError.result;
+
+    return this.ok<ManyCustomersViewModel>(res, CustomerPresenter.bulkToViewModel(customersDTO));
   }
 }
