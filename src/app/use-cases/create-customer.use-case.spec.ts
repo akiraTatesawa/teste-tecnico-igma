@@ -3,15 +3,15 @@ import { InMemoryTestCustomerRepository } from "@tests/repositories/in-memory-cu
 import { EntityErrors } from "@app/errors/entity-errors";
 import { CustomerFactory } from "@tests/factories/customer-factory";
 import { CustomerErrors } from "@app/errors/customer-errors";
-import { CreateCustomer } from "./create-customer.use-case";
+import { CreateCustomerImpl } from "./create-customer.use-case";
 
 describe("Create Customer Use Case", () => {
-  let sut: CreateCustomer;
+  let sut: CreateCustomerImpl;
   let customerRepository: InMemoryTestCustomerRepository;
 
   beforeEach(() => {
     customerRepository = new InMemoryTestCustomerRepository();
-    sut = new CreateCustomer(customerRepository);
+    sut = new CreateCustomerImpl(customerRepository);
   });
 
   describe("Success", () => {
