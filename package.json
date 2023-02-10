@@ -10,7 +10,7 @@
     "test:compose": "npm run test:docker:build && docker-compose -f docker-compose.test.yml",
     "test:postgres:up": "npm run test:compose -- up -d igma-postgres-test",
     "test:docker": "npm run test:compose -- up",
-    "ci:test": "npm run test:load-env -- prisma generate && npm run test:load-env -- prisma migrate dev && jest --runInBand --verbose --coverage=true",
+    "ci:test": "npm run test:load-env -- prisma generate && npm run test:load-env -- prisma migrate dev && npm run test:load-env -- jest --runInBand --verbose --coverage=true",
     "dev:compose": "docker-compose -f docker-compose.development.yml --env-file .env.development",
     "dev:postgres": "npm run dev:compose -- up -d igma-postgres-development",
     "dev:docker": "npm run dev:compose -- up",
