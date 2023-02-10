@@ -11,5 +11,8 @@ export class CustomerRouter extends ExpressRouter {
       SchemaValidator.validateBody(CustomerSchemas.createCustomerSchema),
       customerController.createCustomer
     );
+
+    // List Customer by CPF
+    this.expressRouter.get("/:customerCPF", customerController.listCustomerByCPF);
   }
 }
