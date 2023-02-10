@@ -1,4 +1,7 @@
-import { CustomerRepository } from "@app/ports/repositories/customer-repository";
+import {
+  CustomerPagination,
+  CustomerRepository,
+} from "@app/ports/repositories/customer-repository";
 import { Customer } from "@domain/customer/customer.entity";
 
 export class InMemoryTestCustomerRepository implements CustomerRepository {
@@ -14,5 +17,11 @@ export class InMemoryTestCustomerRepository implements CustomerRepository {
     if (!customer) return null;
 
     return customer;
+  }
+
+  public async listAll({ skip, take }: CustomerPagination): Promise<Customer[]> {
+    const customers = this.customers.slice(skip, skip + (take ?? this.customers.length));
+
+    return customers;
   }
 }
