@@ -5,3 +5,10 @@ export interface ListCustomerRequest extends express.Request {
     customerCPF: string;
   };
 }
+
+export interface ListManyCustomersRequest extends express.Request {
+  query: {
+    limit: string;
+    offset: string;
+  };
+}

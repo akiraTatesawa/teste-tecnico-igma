@@ -18,6 +18,10 @@ export class CustomerDataMapper {
     return customerEntityOrError.result as Customer;
   }
 
+  public static bulkToDomain(rawCustomers: PrismaCustomer[]): Customer[] {
+    return rawCustomers.map((raw) => CustomerDataMapper.toDomain(raw));
+  }
+
   public static toPersistence(customer: Customer): PrismaCustomer {
     return {
       id: customer.id,

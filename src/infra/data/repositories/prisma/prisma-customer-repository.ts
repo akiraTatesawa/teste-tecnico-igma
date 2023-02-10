@@ -1,4 +1,7 @@
-import { CustomerRepository } from "@app/ports/repositories/customer-repository";
+import {
+  CustomerPagination,
+  CustomerRepository,
+} from "@app/ports/repositories/customer-repository";
 import { Customer } from "@domain/customer/customer.entity";
 import { PrismaDatabase } from "@infra/data/databases/prisma/config/prisma.database";
 import { CustomerDataMapper } from "@infra/data/mappers/customer-data-mapper";
@@ -20,6 +23,20 @@ export class PrismaCustomerRepository implements CustomerRepository {
     if (!rawCustomer) return null;
 
     return CustomerDataMapper.toDomain(rawCustomer);
+  }
+
+  public async listAll(paginationArgs: CustomerPagination): Promise<Customer[]> {
+    const { skip, take } = paginationArgs;
+
+    const rawCustomers = await this._prisma.customer.findMany({
+      skip,
+      take,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return CustomerDataMapper.bulkToDomain(rawCustomers);
   }
 
   public async insert(customer: Customer): Promise<void> {

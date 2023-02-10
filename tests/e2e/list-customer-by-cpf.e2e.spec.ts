@@ -18,7 +18,7 @@ describe("GET /customers/:customerCPF", () => {
       const validCPF = "167.800.080-95";
       const customer = await CustomerTestHelper.createCustomer(validCPF);
 
-      const response = await server.get(`/customer/${validCPF}`);
+      const response = await server.get(`/customers/${validCPF}`);
 
       expect(response.statusCode).toEqual(httpStatus.OK);
       expect(response.body).toHaveProperty("customer", expect.any(Object));
@@ -34,7 +34,7 @@ describe("GET /customers/:customerCPF", () => {
     it("[422::UNPROCESSABLE_ENTITY] Should return an error if the CPF is invalid", async () => {
       const invalidCPF = "12731213123123132";
 
-      const response = await server.get(`/customer/${invalidCPF}`);
+      const response = await server.get(`/customers/${invalidCPF}`);
 
       expect(response.statusCode).toEqual(httpStatus.UNPROCESSABLE_ENTITY);
       expect(response.body).toHaveProperty("name", "Unprocessable Entity");
@@ -47,7 +47,7 @@ describe("GET /customers/:customerCPF", () => {
     it("[404::NOT_FOUND] Should return an error if the Customer does not exist", async () => {
       const validCPF = "167.800.080-95";
 
-      const response = await server.get(`/customer/${validCPF}`);
+      const response = await server.get(`/customers/${validCPF}`);
 
       expect(response.statusCode).toEqual(httpStatus.NOT_FOUND);
       expect(response.body).toHaveProperty("name", "Not Found");

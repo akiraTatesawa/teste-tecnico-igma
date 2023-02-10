@@ -14,5 +14,8 @@ export class CustomerRouter extends ExpressRouter {
 
     // List Customer by CPF
     this.expressRouter.get("/:customerCPF", customerController.listCustomerByCPF);
+
+    // List Many Customers
+    this.expressRouter.get("/", customerController.listManyCustomers);
   }
 }

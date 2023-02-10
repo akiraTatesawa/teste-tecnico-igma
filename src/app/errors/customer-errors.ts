@@ -11,4 +11,6 @@ export namespace CustomerErrors {
       super("Customer not found");
     }
   }
+
+  export class InvalidParamsError extends Error {}
 }
