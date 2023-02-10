@@ -32,7 +32,7 @@ Nesta rota é possível realizar o cadastro de um cliente fornecendo os dados: `
   - sem máscara: `11122233399`;
 - `birthday` deve estar no formato `DD/MM/YYYY`;
 
-### Requisição
+#### Requisição
 
 ```json
 {
@@ -42,7 +42,7 @@ Nesta rota é possível realizar o cadastro de um cliente fornecendo os dados: `
 }
 ```
 
-### Resposta
+#### Resposta
 
 ```http
 HTTP/1.1 201 Created
@@ -82,7 +82,7 @@ Nesta rota, é possível buscar um cliente através do seu CPF.
   GET /customers/40020084013
   ```
   
-### Resposta
+#### Resposta
 
 ```http
 HTTP/1.1 200 OK
