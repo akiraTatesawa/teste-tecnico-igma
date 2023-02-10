@@ -1,0 +1,174 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-02-10T22:28:32.479Z",
+    "__export_source": "insomnia.desktop.app:v2022.4.0",
+    "resources": [
+        {
+            "_id": "req_27dd4e352fda49e88dad62b710b363fa",
+            "parentId": "fld_10f5591e4235490d91fa99cf59414c17",
+            "modified": 1676068067196,
+            "created": 1675999839538,
+            "url": "{{ _.URL }}/customers",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\": \"Nome Falso Dois\",\n\t\"cpf\": \"241.877.890-81\",\n\t\"birthday\": \"09/07/1999\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_eb15f14e76c14c319f00a9fd7dda309e"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1676056087538,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_10f5591e4235490d91fa99cf59414c17",
+            "parentId": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "modified": 1675999837688,
+            "created": 1675999837688,
+            "name": "Customers",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1675999837688,
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "parentId": null,
+            "modified": 1675999788537,
+            "created": 1675999788537,
+            "name": "IGMA API",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_ad480119630744b9a24bcca4066c84de",
+            "parentId": "fld_10f5591e4235490d91fa99cf59414c17",
+            "modified": 1676068056365,
+            "created": 1676056087488,
+            "url": "{{ _.URL }}/customers",
+            "name": "List Many",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [
+                {
+                    "id": "pair_944d72e4ab9a47ec96b7d7cabda96794",
+                    "name": "limit",
+                    "value": "2",
+                    "description": "",
+                    "disabled": true
+                },
+                {
+                    "id": "pair_2020b42959374f329be3790743badf6f",
+                    "name": "offset",
+                    "value": "1",
+                    "description": "",
+                    "disabled": true
+                }
+            ],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1676056087488,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_fc2b6028ba424b338333b9ad2e617e92",
+            "parentId": "fld_10f5591e4235490d91fa99cf59414c17",
+            "modified": 1676056102026,
+            "created": 1676050454650,
+            "url": "{{ _.URL }}/customers/{% response 'body', 'req_27dd4e352fda49e88dad62b710b363fa', 'b64::JC5jdXN0b21lci5jcGY=::46b', 'no-history', 60 %}",
+            "name": "List by CPF",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1676027963513,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_d569b9f733165500df75163b5baf08a9f7e7cf8d",
+            "parentId": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "modified": 1675999795151,
+            "created": 1675999788540,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": {},
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1675999788540,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_d569b9f733165500df75163b5baf08a9f7e7cf8d",
+            "parentId": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "modified": 1675999788541,
+            "created": 1675999788541,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_ab09ad4d20244e969c46a09ff8054991",
+            "parentId": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "modified": 1675999788538,
+            "created": 1675999788538,
+            "fileName": "IGMA API",
+            "contents": "",
+            "contentType": "yaml",
+            "_type": "api_spec"
+        },
+        {
+            "_id": "env_d68913f383334678a358ee16b2ca59e4",
+            "parentId": "env_d569b9f733165500df75163b5baf08a9f7e7cf8d",
+            "modified": 1675999828069,
+            "created": 1675999796978,
+            "name": "development",
+            "data": {
+                "URL": "http://localhost:4000"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "URL"
+                ]
+            },
+            "color": "#ab84e6",
+            "isPrivate": false,
+            "metaSortKey": 1675999796978,
+            "_type": "environment"
+        }
+    ]
+}
