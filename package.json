@@ -4,6 +4,7 @@
   "description": "API para cadastro de clientes",
   "main": "index.js",
   "scripts": {
+    "test:load-env": "dotenv -e .env.test",
     "test": "jest --runInBand --testPathIgnorePatterns=.e2e --verbose --coverage=true",
     "test:docker:build": "docker-compose -f docker-compose.test.yml build igma-test --no-cache",
     "test:compose": "npm run test:docker:build && docker-compose -f docker-compose.test.yml",
