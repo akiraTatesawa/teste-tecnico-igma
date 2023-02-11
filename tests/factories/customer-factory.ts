@@ -25,4 +25,10 @@ export class CustomerFactory {
       createdAt: new Date(),
     };
   }
+
+  public static generateCustomerDTOArray(): CustomerDTO[] {
+    const customer = CustomerFactory.generateCustomerDTO();
+
+    return [customer, customer, customer];
+  }
 }

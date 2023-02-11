@@ -20,6 +20,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@root/*": [
+        "./*"
+      ],
       "@core/*": [
         "./src/core/*"
       ],
@@ -45,7 +48,8 @@
         "afterDeclarations": true
       }
     ],
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./src",
