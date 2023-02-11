@@ -85,8 +85,123 @@
                                     "$ref": "#/components/schemas/ErrorModel"
                                 },
                                 "example": {
-                                    "name": "Conflict",
+                                    "name": "Unprocessable Entity",
                                     "message": "The CPF must follow the patterns '99999999900' or '999.999.999-00'"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "busca clientes",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Quantidade máxima de clientes a serem buscados",
+                        "type": "string",
+                        "allowReserved": false,
+                        "example": "1"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Quantidade de clientes que devem ser ignorados na busca",
+                        "type": "string",
+                        "allowReserved": false,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCustomersList"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetros inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                },
+                                "example": {
+                                    "name": "Bad Request",
+                                    "message": "Limit and Offset must be non-negative numbers"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customers/{customerCPF}": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "description": "Buscar um cliente a partir do seu CPF, com ou sem formatação",
+                "summary": "busca de cliente por CPF",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "customerCPF",
+                        "in": "path",
+                        "description": "CPF do cliente, com ou sem formatação",
+                        "required": true,
+                        "type": "string",
+                        "example": "726.764.792-88"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCustomer"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "CPF inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                },
+                                "example": {
+                                    "name": "Unprocessable Entity",
+                                    "message": "The CPF must follow the patterns '99999999900' or '999.999.999-00'"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cliente não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                },
+                                "example": {
+                                    "name": "Not Found",
+                                    "message": "Customer not found"
                                 }
                             }
                         }
@@ -161,6 +276,17 @@
                 "properties": {
                     "customer": {
                         "$ref": "#/components/schemas/Customer"
+                    }
+                }
+            },
+            "ResponseCustomersList": {
+                "type": "object",
+                "properties": {
+                    "customers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Customer"
+                        }
                     }
                 }
             },
