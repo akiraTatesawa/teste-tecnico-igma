@@ -5,16 +5,11 @@ services:
     container_name: igma-postgres-test
     restart: always
     env_file: 
-      - .env
-    environment:
-      POSTGRES_USER: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DATABASE}
-      DATABASE_URL: ${DATABASE_URL}
+      - .env.test
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     volumes:
-      - ~/data/igma/postgres-test:/var/lib/postgresql/data
+      - postgres-test:/var/lib/postgresql/data
     command: postgres -p ${POSTGRES_PORT}
       
   igma-test:
@@ -24,6 +19,8 @@ services:
     container_name: igma-test
     depends_on:
       - igma-postgres-test
+    env_file:
+      - .env.test
     logging:
       driver: 'json-file'
       options:
@@ -31,7 +28,6 @@ services:
         max-file: '5'
     working_dir: /usr/src/
     command: bash -c "npx prisma generate && npx prisma migrate dev && npm run test"
-    env_file:
-      - .env
-    environment:
-      NODE_ENV: test
+  
+volumes:
+  postgres-test:

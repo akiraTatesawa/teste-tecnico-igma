@@ -6,8 +6,8 @@
   "scripts": {
     "test:load-env": "dotenv -e .env.test",
     "test": "jest --runInBand --verbose --coverage=true",
-    "test:docker:build": "docker-compose -f docker-compose.test.yml build igma-test --no-cache",
-    "test:compose": "npm run test:docker:build && docker-compose -f docker-compose.test.yml",
+    "test:docker:build": "docker-compose -f docker-compose.test.yml --env-file .env.test build igma-test --no-cache",
+    "test:compose": "npm run test:docker:build && docker-compose -f docker-compose.test.yml --env-file .env.test",
     "test:postgres:up": "npm run test:compose -- up -d igma-postgres-test",
     "test:docker": "npm run test:compose -- up",
     "ci:test": "npm run test:load-env -- prisma generate && npm run test:load-env -- prisma migrate dev && npm run test:load-env -- jest --runInBand --verbose --coverage=true",
