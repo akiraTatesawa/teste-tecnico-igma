@@ -6,21 +6,25 @@ import { CustomerErrors } from "@app/errors/customer-errors";
 import { EntityErrors } from "@app/errors/entity-errors";
 import { ListCustomerByCPF } from "@app/use-cases/list-customer-by-cpf.use-case";
 import { ExpressFactory } from "@tests/factories/express-factory";
+import { ListManyCustomers } from "@app/use-cases/list-many-customers.use-case";
 import { CustomerController } from "./customer-controller";
 import { CreateCustomerRequest } from "../requests/create-customer.request";
-import { ListCustomerRequest } from "../requests/list-customer.request";
+import { ListCustomerRequest, ListManyCustomersRequest } from "../requests/list-customer.request";
+import { CustomerPresenter } from "../presenters/customer-presenter";
 
 describe("Customer Controller", () => {
   let mockCreateCustomer: CreateCustomerUseCase;
   let mockListCustomer: ListCustomerByCPF;
+  let mockListManyCustomers: ListManyCustomers;
 
   let sut: CustomerController;
 
   beforeEach(() => {
     mockCreateCustomer = { execute: jest.fn() };
     mockListCustomer = { execute: jest.fn() };
+    mockListManyCustomers = { execute: jest.fn() };
 
-    sut = new CustomerController(mockCreateCustomer, mockListCustomer);
+    sut = new CustomerController(mockCreateCustomer, mockListCustomer, mockListManyCustomers);
   });
 
   describe("Create Customer", () => {
@@ -179,6 +183,56 @@ describe("Customer Controller", () => {
         .mockResolvedValueOnce(left(new CustomerErrors.NotFoundError()));
 
       await sut.listCustomerByCPF(request, mockResponse);
+    });
+  });
+
+  describe("List Many Customer", () => {
+    it("Should return all the customers", async () => {
+      const mockResponse = ExpressFactory.createMockResponse();
+      const request = { query: {} } as ListManyCustomersRequest;
+      const customers = CustomerFactory.generateCustomerDTOArray();
+      jest.spyOn(mockListManyCustomers, "execute").mockResolvedValueOnce(right(customers));
+
+      await sut.listManyCustomers(request, mockResponse);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(httpStatus.OK);
+      expect(mockResponse.json).toHaveBeenCalledWith(CustomerPresenter.bulkToViewModel(customers));
+    });
+
+    it("Should return an Bad Request Error if limit or offset are invalid values", async () => {
+      const mockResponse = ExpressFactory.createMockResponse();
+      const request = { query: { limit: "invalid" } } as ListManyCustomersRequest;
+      jest
+        .spyOn(mockListManyCustomers, "execute")
+        .mockResolvedValueOnce(
+          left(
+            new CustomerErrors.InvalidParamsError("Limit and Offset must be non-negative numbers")
+          )
+        );
+
+      await sut.listManyCustomers(request, mockResponse);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(httpStatus.BAD_REQUEST);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        name: "Bad Request",
+        message: "Limit and Offset must be non-negative numbers",
+      });
+    });
+
+    it("Should return an Internal Server Error if an unknown error occurs", async () => {
+      const mockResponse = ExpressFactory.createMockResponse();
+      const request = { query: {} } as ListManyCustomersRequest;
+      jest
+        .spyOn(mockListManyCustomers, "execute")
+        .mockResolvedValueOnce(left(new Error("Unknown Error")));
+
+      await sut.listManyCustomers(request, mockResponse);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(httpStatus.INTERNAL_SERVER_ERROR);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        name: "Internal Server Error",
+        message: "Unknown Error",
+      });
     });
   });
 });
