@@ -11,6 +11,9 @@ Este é um projeto proposto como desafio técnico para uma posição de dev back
   - [Cadastro de Cliente](#cadastro-de-cliente)
   - [Listagem de Cliente por CPF](#listagem-de-cliente-por-cpf)
   - [Listagem de múltiplos Clientes](#listagem-de-múltiplos-clientes)
+- [🗂 Estrutura das pastas](#-estrutura-das-pastas)
+- [🚀 Rodando a Aplicação](#-rodando-a-aplicação)
+- [🧪 Testes Automatizados](#-testes-automatizados)
 
 ## 🧰 Tecnologias Utilizadas
 
@@ -157,3 +160,70 @@ HTTP/1.1 200 OK
 | :--------------- | :-------   | :--------------------------------- |
 | `json`           |   `200`    | **OK**          |
 | `json`           |   `400`    | **Bad Request**, `limit` ou `offset` inválidos |
+
+## 🗂 Estrutura das pastas
+
+| Diretório       | Conteúdo                                           |
+|---------------- |--------------------------------------------------- |
+| `requirements/`  | descrição das features em Gherkin                  |
+| `tests/`          | testes e2e, factories, repositórios in-memory      |
+| `src/`           | código da aplicação                                |
+| `src/core`       | abstrações e monads                                |
+| `src/domain`    | entidades e value objects                          |
+| `src/app`         | use cases, ports, DTOs, application errors         |
+| `src/infra`       | bibliotecas externas, banco de dados               |
+| `src/infra/http`  | controllers, middlewares, presenters, view models  |
+| `src/infra/data`  | repositórios, data mappers, orm                    |
+
+## 🚀 Rodando a Aplicação
+
+1. Clone e navegue até o repositório:
+
+    ```bash
+      git clone https://github.com/akiraTatesawa/teste-tecnico-igma.git
+
+      cd teste-tecnico-igma/
+    ```
+
+2. Crie um arquivo `.env.development` seguindo o exemplo descrito em `.env.sample`:
+
+    | Nome                 | Descrição                         |
+    |--------------------- |---------------------------------- |
+    | `PORT`               | porta onde a aplicação vai rodar  |
+    | `POSTGRES_USERNAME`  | username do postgres              |
+    | `POSTGRES_PASSWORD`  | senha do postgres                 |
+    | `POSTGRES_HOST`      | host do postgres                  |
+    | `POSTGRES_PORT`      | porta do postgres                 |
+    | `POSTGRES_DATABASE`  | nome do banco de dados            |
+    | `DATABASE_URL`       | URL de conexão do postgres        |
+
+3. Instale as dependências do projeto:
+
+    ```bash
+      npm i
+    ```
+
+4. Rode o projeto em modo de desenvolvimento:
+
+    ```bash
+      npm run dev:docker
+    ```
+
+## 🧪 Testes Automatizados
+
+1. Crie um arquivo `.env.test` seguindo o exemplo abaixo:
+
+    | Nome                 | Descrição                         |
+    |--------------------- |---------------------------------- |
+    | `POSTGRES_USERNAME`  | username do postgres              |
+    | `POSTGRES_PASSWORD`  | senha do postgres                 |
+    | `POSTGRES_HOST`      | host do postgres                  |
+    | `POSTGRES_PORT`      | porta do postgres                 |
+    | `POSTGRES_DATABASE`  | nome do banco de dados de teste   |
+    | `DATABASE_URL`       | URL de conexão do postgres        |
+
+2. Rode o comando de testes:
+
+    ```bash
+      npm run test:docker
+    ```

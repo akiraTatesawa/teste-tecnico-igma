@@ -37,7 +37,7 @@ services:
       - ./.env.development:/usr/src/.env.development
       - ./tsconfig.json:/usr/src/tsconfig.json
     ports:
-      - 4000:4000
+      - ${PORT}:${PORT}
       
 volumes:
   igma-postgres-data:
