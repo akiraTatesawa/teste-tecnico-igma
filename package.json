@@ -7,7 +7,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "prepare": "ts-patch install -s",
-    "start": "node -r tsconfig-paths/register dist/infra/http/server.js",
+    "start": "node -r tsconfig-paths/register dist/src/infra/http/server.js",
     "test:load-env": "dotenv -e .env.test",
     "test": "jest --runInBand --verbose --coverage=true",
     "test:docker:build": "docker-compose -f docker-compose.test.yml --env-file .env.test build igma-test",
