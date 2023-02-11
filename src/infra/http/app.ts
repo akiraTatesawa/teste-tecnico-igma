@@ -6,6 +6,8 @@ import cors from "cors";
 import { Application } from "@core/infra/http/application";
 import { ServerRouter } from "./routers/server-router";
 import { ErrorHandler } from "./middlewares/error-handler.middleware";
+import { WinstonLogger } from "./logger/logger";
+import { morganMiddleware } from "./middlewares/morgan.middleware";
 
 export class ExpressApp extends Application {
   private readonly _name: string;
@@ -31,17 +33,18 @@ export class ExpressApp extends Application {
     this._app.use(cors());
     this._app.use(express.json());
 
+    this._app.use(morganMiddleware);
     this._app.use(this._serverRouter);
     this._app.use(ErrorHandler.handleExceptions);
   }
 
   public async init(): Promise<void> {
-    console.clear();
-
     const { PORT } = process.env;
 
+    const logger = WinstonLogger.create();
+
     this._app.listen(PORT || 5000, () => {
-      console.log(`[${this._name}] running on [PORT::${PORT}]`);
+      logger.info(`[${this._name}] running on [PORT::${PORT}]`);
     });
   }
 }
