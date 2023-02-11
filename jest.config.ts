@@ -12,6 +12,7 @@ const jestConfig: JestConfigWithTsJest = {
     "^.+\\.(t|j)sx?$": "@swc/jest",
   },
   moduleNameMapper: {
+    "^@root/(.*)$": "<rootDir>/$1",
     "^@core/(.*)$": "<rootDir>/src/core/$1",
     "^@infra/(.*)$": "<rootDir>/src/infra/$1",
     "^@domain/(.*)$": "<rootDir>/src/domain/$1",

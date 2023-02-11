@@ -1,0 +1,182 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IGMA API",
+        "description": "Este é um projeto proposto como desafio técnico para uma posição de dev back-end na igma. Trata-se de uma API responsável pelo cadastro e listagem de clientes.",
+        "contact": {
+            "name": "support",
+            "email": "arthurakira.dev@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "tags": [
+            {
+                "name": "Clientes"
+            }
+        ],
+        "/customers": {
+            "post": {
+                "tags": [
+                    "Clientes"
+                ],
+                "description": "Criação de um Cliente",
+                "summary": "cria um cliente",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "description": "Cliente a ser cadastrado no sistema",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestCustomer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cliente criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCustomer"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Corpo da requisição com formato inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                },
+                                "example": {
+                                    "name": "Bad Request",
+                                    "message": "'name' is required"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "CPF já cadastrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                },
+                                "example": {
+                                    "name": "Conflict",
+                                    "message": "The CPF '726.764.792-88' is already being used"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "'cpf', 'name' ou 'birthday' com valores inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorModel"
+                                },
+                                "example": {
+                                    "name": "Conflict",
+                                    "message": "The CPF must follow the patterns '99999999900' or '999.999.999-00'"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RequestCustomer": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "nome do cliente, apenas letras"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "description": "CPF do cliente, com ou sem pontuação"
+                    },
+                    "birthday": {
+                        "type": "string",
+                        "description": "data de nascimento do cliente no formato DD/MM/YYYY"
+                    }
+                },
+                "required": [
+                    "name",
+                    "cpf",
+                    "birthday"
+                ],
+                "example": {
+                    "name": "Nome do Cliente",
+                    "cpf": "726.764.792-88",
+                    "birthday": "10/09/2000"
+                }
+            },
+            "Customer": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "id do cliente (UUID)"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "nome do cliente, apenas letras"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "description": "CPF do cliente com pontuação"
+                    },
+                    "birthday": {
+                        "type": "string",
+                        "description": "data de nascimento do cliente no formato DD/MM/YYYY"
+                    },
+                    "registrationDate": {
+                        "type": "string",
+                        "description": "timestamp de criação do cliente"
+                    }
+                },
+                "example": {
+                    "id": "3d00a92d-60eb-4d5c-9572-c34a84312bcd",
+                    "name": "Nome do Cliente",
+                    "cpf": "726.764.792-88",
+                    "birthday": "10/09/1987",
+                    "registrationDate": "11/02/2023 14:31:17"
+                }
+            },
+            "ResponseCustomer": {
+                "type": "object",
+                "properties": {
+                    "customer": {
+                        "$ref": "#/components/schemas/Customer"
+                    }
+                }
+            },
+            "ErrorModel": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "nome do erro http"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "mensagem de erro"
+                    }
+                }
+            }
+        }
+    }
+}
