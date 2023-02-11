@@ -197,6 +197,8 @@ HTTP/1.1 200 OK
     | `POSTGRES_DATABASE`  | nome do banco de dados            |
     | `DATABASE_URL`       | URL de conexão do postgres        |
 
+    - É importante manter a variável `POSTGRES_HOST` como sendo igual a `igma-postgres-development`.
+
 3. Instale as dependências do projeto:
 
     ```bash
@@ -221,6 +223,8 @@ HTTP/1.1 200 OK
     | `POSTGRES_PORT`      | porta do postgres                 |
     | `POSTGRES_DATABASE`  | nome do banco de dados de teste   |
     | `DATABASE_URL`       | URL de conexão do postgres        |
+
+    - É importante manter a variável `POSTGRES_HOST` como sendo igual a `igma-postgres-test`.
 
 2. Rode o comando de testes:
 
