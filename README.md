@@ -30,9 +30,11 @@ Este é um projeto proposto como desafio técnico para uma posição de dev back
 
 ## 🧭 Referências da API
 
-Para importar todos os endpoints e testar a aplicação, clique no botão abaixo:
+Para importar todos os endpoints e testar a aplicação localmente, clique no botão abaixo:
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=IGMA%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2FakiraTatesawa%2Fteste-tecnico-igma%2Fdocs%2Fread-me%2Finsomnia%2Figma_api_insomnia.json)
+
+Para acessar a documentação escrita em [Swagger](https://swagger.io/), acesse o endpoint `/api-docs`
 
 ----
 

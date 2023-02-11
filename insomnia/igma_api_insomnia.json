@@ -1,13 +1,58 @@
 {
     "_type": "export",
     "__export_format": 4,
-    "__export_date": "2023-02-10T22:28:32.479Z",
+    "__export_date": "2023-02-11T19:16:16.271Z",
     "__export_source": "insomnia.desktop.app:v2022.4.0",
     "resources": [
         {
+            "_id": "req_c0cb5055efe24801a89cc17baf582ae4",
+            "parentId": "fld_41e72a195c0645839c62cfd3874cbd7d",
+            "modified": 1676142893545,
+            "created": 1676142832592,
+            "url": "{{ _.URL }}/api-docs",
+            "name": "Swagger Docs",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1676142885420,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_41e72a195c0645839c62cfd3874cbd7d",
+            "parentId": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "modified": 1676142885370,
+            "created": 1676142885370,
+            "name": "Docs",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1676142885370,
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_801be919d675485883f7b72c6fddcc5a",
+            "parentId": null,
+            "modified": 1675999788537,
+            "created": 1675999788537,
+            "name": "IGMA API",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
             "_id": "req_27dd4e352fda49e88dad62b710b363fa",
             "parentId": "fld_10f5591e4235490d91fa99cf59414c17",
-            "modified": 1676068067196,
+            "modified": 1676142938880,
             "created": 1675999839538,
             "url": "{{ _.URL }}/customers",
             "name": "Create",
@@ -15,7 +60,7 @@
             "method": "POST",
             "body": {
                 "mimeType": "application/json",
-                "text": "{\n\t\"name\": \"Nome Falso Dois\",\n\t\"cpf\": \"241.877.890-81\",\n\t\"birthday\": \"09/07/1999\"\n}"
+                "text": "{\n\t\"name\": \"Nome Falso\",\n\t\"cpf\": \"937.239.260-02\",\n\t\"birthday\": \"10/02/2019\"\n}"
             },
             "parameters": [],
             "headers": [
@@ -49,19 +94,9 @@
             "_type": "request_group"
         },
         {
-            "_id": "wrk_801be919d675485883f7b72c6fddcc5a",
-            "parentId": null,
-            "modified": 1675999788537,
-            "created": 1675999788537,
-            "name": "IGMA API",
-            "description": "",
-            "scope": "collection",
-            "_type": "workspace"
-        },
-        {
             "_id": "req_ad480119630744b9a24bcca4066c84de",
             "parentId": "fld_10f5591e4235490d91fa99cf59414c17",
-            "modified": 1676068056365,
+            "modified": 1676142911918,
             "created": 1676056087488,
             "url": "{{ _.URL }}/customers",
             "name": "List Many",
@@ -72,7 +107,7 @@
                 {
                     "id": "pair_944d72e4ab9a47ec96b7d7cabda96794",
                     "name": "limit",
-                    "value": "2",
+                    "value": "1",
                     "description": "",
                     "disabled": true
                 },
@@ -154,7 +189,7 @@
         {
             "_id": "env_d68913f383334678a358ee16b2ca59e4",
             "parentId": "env_d569b9f733165500df75163b5baf08a9f7e7cf8d",
-            "modified": 1675999828069,
+            "modified": 1676079327644,
             "created": 1675999796978,
             "name": "development",
             "data": {
