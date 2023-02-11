@@ -208,10 +208,14 @@ HTTP/1.1 200 OK
       npm i
     ```
 
-4. Rode o projeto em modo de desenvolvimento:
+4. Rode o projeto em modo de desenvolvimento com NPM ou docker:
 
     ```bash
+      ## Rodando com NPM e Node
       npm run dev:docker
+
+      ## Rodando com Docker e docker-compose
+      docker-compose -f docker-compose.development.yml --env-file .env.development up 
     ```
 
 ## 🧪 Testes Automatizados
@@ -229,8 +233,12 @@ HTTP/1.1 200 OK
 
     - É importante manter a variável `POSTGRES_HOST` como sendo igual a `igma-postgres-test`.
 
-2. Rode o comando de testes:
+2. Rode o comando de testes com NPM ou docker:
 
     ```bash
+      ## Rodando com NPM e Node
       npm run test:docker
+
+      ## Rodando com Docker e docker-compose
+      docker-compose -f docker-compose.test.yml --env-file .env.test up
     ```
